@@ -1,0 +1,2350 @@
+/* css index
+
+1 전체 설정 + 페이징
+2 include folder
+   header - nav - footer
+3 enter folder
+   login - signUp
+4 main
+5 board(lost,find) list page 셋팅
+6 board(lost,find) write page 셋팅
+7 board(lost,find) detail page 셋팅
+8 questionPage folder
+	questionPage
+9 servicePage folder - 사용x
+	servicePage
+======================
+10 admin-include folder
+	header - nav
+11 admin folder
+	login - main - board - member - q&a
+12 admin folder detail pages setting
+	board - member - question
+======================
+13 myPage
+14 사이즈 조정
+*/
+
+/* index-1 전체설정 + 페이징 */
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sunflower', sans-serif;
+    font-size: 13px;
+    color: #4a4949;
+    letter-spacing: 1px;
+    transition: all .35s;
+}
+
+input::placeholder { font-size: 80%; text-align: center;}
+
+
+input {
+    padding: 0 15px;
+}
+
+a { text-decoration:none } /*모든 a태그의 text-decoration 없애기*/
+
+[id*='errors'] { color: #f7c180; font-size: 10px; padding-left: 10px;} /*에러메세지 주황색 표기*/
+
+ul, li {list-style: none;}
+
+.paging {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.paging ul {
+    display: inline-flex;
+}
+
+.paging ul li {
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.paging ul li a {
+    font-size: 15px
+}
+
+.paging ul li a:hover {
+    color: #f7c180;
+    text-decoration: underline;
+}
+
+
+
+
+/* .section { padding-top: 120px;} header에 가려지지 않게 하기 위해-각 페이지마다 다를 수 있음 main 기준임 - header fixed 설정 해제로 해당 기능 필요 없음 */
+
+
+/* ========================= */
+/*  index-2 include-header  */
+
+.headerTop {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10px 0 0;
+}
+
+header {
+    width: 100%;
+    /*     position: fixed; */
+    box-shadow: 1px 1px 10px 1px #80808036;
+}
+
+.headerbottom {
+    display: flex;
+    justify-content: center;
+}
+
+.mainTitle {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.mainTitle p {
+    padding: 0 0 10px 15px;
+}
+
+.mainTitle p a {
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.fa-accusoft { /* 로고 크기/색상 조정 */
+    font-size: 25px;
+    color: #fed400;
+}
+
+.enter p {
+    padding: 10px;
+}
+
+.enter p a {
+    padding: 0px 3px;
+    font-size: 10px;
+}
+
+.enter p a:hover {
+    font-size: 12px;
+    background-color: lightgoldenrodyellow;
+    transition: all .35s;
+}
+
+
+
+
+
+/* ========================= */
+/*  index-2 include-nav  */
+
+nav {
+    height: 50px;
+    width: 100%;
+    border-top: 0.1px solid gray;
+    border-bottom: 0.1px solid gray;
+    background-color: white;
+}
+
+.navInner {
+    display: flex;
+    justify-content: center;
+}
+
+.mainMenu ul {
+    display: flex;
+}
+
+.mainMenu ul li {
+    padding: 15px 100px;
+    margin: 0px;
+    font-size: 12px;
+    background-color: white;
+}
+
+.mainMenu ul li:hover {
+    cursor: pointer;
+    background-color: #1ABC9C;
+    border-radius: 8px;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+.mainMenu ul li:hover {
+    color: white;
+}
+
+.search {
+    padding-top: 5px;
+}
+
+.search form input {
+    width: 80%;
+    border: none;
+    border-bottom: gray 1.5px solid;
+    padding: 0 5px;
+}
+
+.search form button {
+    border: none;
+    background-color: white;
+    padding-top: 5px;
+}
+
+.search form button img {
+    width: 15px;
+    background-color: white;
+    padding: 5px 0 0 5px;
+}
+
+.search form button img:hover {
+    cursor:pointer;
+}
+
+.navToggleBtn {
+    display: none;
+}
+
+
+
+
+/* ========================= */
+/* index-2 include-footer */
+
+footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid gray; /* border은 삭제 할지 미정 */
+}
+
+.site {
+    width: 100%;
+    height: 50px;
+}
+
+.site:first-child {
+    background-color: #FAF1E6;
+}
+
+.site:nth-of-type(2) {
+    background-color: #FDFAF6;
+}
+
+.site a {
+    position: relative;
+    top: 30%;
+    left: 40%;
+    font-size: 15px;
+}
+
+.site a:hover {
+    text-decoration: underline;
+}
+
+.footerUpper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0% 5%;
+}
+
+.footerMenu ul {
+    display: flex;
+}
+
+.footerMenu ul li {
+    padding: 20px;
+}
+
+.footerMenu ul li a:hover {
+    cursor: pointer;
+    color: #ed4848;
+    text-decoration: underline;
+    transition: all .15s;
+}
+
+
+.footerIcon ul {
+    display: flex;
+}
+
+.footerIcon ul li {
+    padding: 20px;
+}
+
+.footerIcon ul li button {
+    border: none;
+    background: none;
+}
+
+.footerIcon ul li i {
+    font-size: 20px
+}
+
+.footerIcon ul li i:hover {
+    cursor: pointer;
+    color: #ed4848;
+}
+
+.footerIcon ul li span {
+    display: none;
+    position: absolute;
+    top: 150px;
+    right: 100px;
+}
+
+.footerIcon ul li:hover span {
+    display: flex;
+}
+
+.footerlower {
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+/* ========================= */
+/*  index-3 enter-login  */
+
+.loginInner {
+    width: 100%;
+}
+
+.sectionLogin {
+    padding: 80px 0 150px 0;
+    width: 100%
+}
+
+.loginTitle {
+    padding: 2% 0%;
+    font-size: 25px;
+    margin-left: 40%;
+    width: 100px;
+}
+
+.loginBox {
+    height: 270px;
+    width: 500px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 0 35%;
+    background-color: #fbfbfb7d;
+    border: 1px solid #dcdcdc;
+    box-shadow: 2px 3px 5px 0px #cccccc;
+}
+
+.loginBox:hover {
+    border: 1px solid gray;
+    transition: all.3s;
+}
+
+.loginBox form {
+    padding-top: 10%;
+    padding-left: 18%;
+}
+
+.loginBox Input {
+    border-radius: 8px;
+    width: 80%;
+    height: 40px;
+    margin : 2% 0%;
+    justify-content: center;
+    border: #cecece 1px solid;
+}
+
+.loginBox Input:hover {
+    border: 1px solid gray;
+    transition: all.3s;
+}
+
+.loginBoxbtn {
+    color: white;
+    background-color: #1ABC9C;
+    cursor: pointer;
+    border: 1px solid #dcdcdc;
+    box-shadow: 2px 3px 5px 0px #cccccc;
+}
+
+.loginBoxLower {
+    padding-top : 20px;
+    padding-left: 50%;
+}
+
+.loginBoxLower p {
+    height: 30px;
+}
+
+.loginBoxLowerText:hover{
+    font-size: 15px;
+    background-color: lightgoldenrodyellow;
+}
+
+/* ========================= */
+/*  index-3 enter-memberInformationFind  */
+
+.memberInformationFindBox{
+    height: 330px;
+}
+
+.memberInformationFindBox2{
+    height: 200px;
+    text-align: center;
+}
+
+.memberInformationFindBox2 form {
+    padding-left: 0;
+}
+
+.memberInformationFindBox-id{
+    height: 280px;
+}
+
+.memberInformationFindBox-idfound{
+    height: 240px;
+}
+
+.memberInformationFindBox-idfound form p {
+    font-size: 15px;
+    text-align: center;
+    margin: 20px 0 30px -90px;
+}
+
+.memberInformationFindBox-idfound strong {
+    color: #1ABC9C;
+}
+
+.fa-frown-open {
+    padding: 0 10px;
+    font-size: 18px;
+    color: #fed400;
+}
+
+.loginBox select {
+    border-radius: 8px;
+    width: 80%;
+    height: 40px;
+    margin: 2% 0%;
+    justify-content: center;
+    border: #cecece 1px solid;
+}
+
+.loginBox select:hover {
+    border: 1px solid gray;
+    transition: all.3s;
+}
+
+/* ========================= */
+/*  index-3 enter-signup  */
+
+
+
+.sectionSignUp {
+    padding: 50px 0;
+}
+
+.signUpInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signUpTitle {
+    padding: 20px 0px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.signUpBox {
+    width: 780px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px 0 0 0;
+    margin: 20px 0 80px 0;
+    background-color: #fbfbfb7d;
+    border: 1px solid #dcdcdc;
+    box-shadow: 2px 3px 5px 0px #cccccc;
+}
+
+.signUpCommandWrap {
+    display: flex;
+    justify-content: center;
+    /* width: 100%; */
+    align-items: center;
+}
+
+.signUpCommand p {
+    margin: 20px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.idChk {
+    font-size: 5px;
+    padding-left: 10px;
+}
+
+.idChk:hover {
+    color: #f7c180;
+}
+
+i#idOk {
+    font-size: 5px;
+    padding-left: 10px;
+    color: #f7c180;
+}
+
+.signUpCommandBox p input {
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: 265px;
+    height: 30px;
+}
+
+.signUpBox select#pwdQ {
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: 265px;
+    height: 30px;
+}
+
+.signUpCommandBox p input:hover {
+    border: 1px solid #f7c180;
+    transition: all.3s;
+}
+
+.signUpTerms {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.checkbox {
+    margin-bottom: 20px;
+}
+
+.signUpBoxbtn {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 30px 0;
+}
+
+.signUpBoxbtn Input {
+    color: white;
+    background-color: #1ABC9C;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 50%;
+    height: 40px;
+    border: 1px solid #dcdcdc;
+    box-shadow: 2px 3px 5px 0px #cccccc;
+}
+
+.signUpBoxbtn Input:hover {
+    border: 1px solid gray;
+    transition: all.3s;
+}
+
+strong {
+    color: red;
+}
+
+/* -- 체크박스 젤리효과 -- */
+
+.checkbox input {
+    display: none;
+}
+
+.checkbox span {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.checkbox label {
+    cursor: pointer;
+}
+
+.checkbox .icon {
+    position: relative;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #c8ccd4;
+    border-radius: 3px;
+    transition: background 0.1s ease;
+}
+
+.checkbox .icon::after{
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 5px;
+    height: 11px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg) scale(0);
+    transition: all 0.3s ease;
+    transition-delay: 0.15s;
+    opacity: 0;
+}
+
+.checkbox .text {
+    margin: 0 10px;
+}
+
+.checkbox input:checked ~ .icon {
+    border-color: transparent;
+    background: #ff1616;
+    animation: jelly 0.6s ease;
+}
+
+.checkbox input:checked ~ .icon::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+}
+
+@keyframes jelly {
+    from {transform: scale(1, 1);}
+    30% {transform: scale(1.25, 0.75);}
+    40% {transform: scale(0.75, 1.25);}
+    50% {transform: scale(1.15, 0.85);}
+    65% {transform: scale(0.95, 1.05);}
+    75% {transform: scale(1.05, 0.95);}
+    to {transform: scale(1, 1);}
+}
+
+/* -- 체크박스 젤리효과 -- */
+
+
+/* ========================= */
+/* index-4 main */
+
+.banner img {
+    width: 100%;
+    box-shadow: 2px 2px 2px 2px #80808036;
+}
+
+.mainSection  {
+    text-align: center;
+}
+
+.mainContentsWrap ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.mainBoard {
+    padding: 80px 0;
+}
+
+.mainLost {
+    padding: 10px 0 0 0;
+    background-color: #fdfaf624;
+    box-shadow: 3px 3px 3px 3px #80808036;
+}
+
+.mainLost p {
+    padding: 40px 0;
+}
+
+.mainMore {
+    padding: 40px 0;
+}
+
+.mainReview {
+    margin-top: 50px;
+}
+
+.titleLine {
+    display: inline-flex;
+    width: 50px;
+    border-bottom: 1px solid #ee6260;
+}
+
+.contentsTitle {
+    padding: 30px 0 10px 0;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+
+/* -- 베너 슬라이드 효과 -- */
+[name="slide"] {display: none;} /* 인풋 안보이게 */
+
+.slidebox {
+    max-width: 2000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.slidebox img {
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.slidebox, .slidelist {
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.slidebox .slideitem {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    transition: all .35s;
+}
+
+.slidebox .slideitem label {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/*  label.left {
+    left: 20px;
+     background-image: url('../img/left-arrow.png');
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+label.right {
+    right: 20px;
+     background-image: url('../img/right-arrow.png');
+    background-position: center center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}  */
+
+[id="slide01"]:checked ~ .slidelist .slideitem {transform: translateX(0); animation: slide01 10s infinite;}
+[id="slide02"]:checked ~ .slidelist .slideitem {transform: translateX(-100%); animation: slide02 10s infinite;}
+[id="slide03"]:checked ~ .slidelist .slideitem {transform: translateX(-200%); animation: slide03 10s infinite;}
+[id="slide04"]:checked ~ .slidelist .slideitem {transform: translateX(-300%); animation: slide04 10s infinite;}
+
+@keyframes slide01 {
+    0% {left: 0%;}
+    23% {left: 0%;}
+    25% {left: -100%;}
+    48% {left: -100%;}
+    50% {left: -200%;}
+    73% {left: -200%;}
+    75% {left: -300%;}
+    98% {left: -300%;}
+    100% {left: 0%;}
+}
+
+@keyframes slide02 {
+    0% {left: 0%;}
+    23% {left: 0%;}
+    25% {left: -100%;}
+    48% {left: -100%;}
+    50% {left: -200%;}
+    73% {left: -200%;}
+    75% {left: 100%;}
+    98% {left: 100%;}
+    100% {left: 0%;}
+}
+
+@keyframes slide03 {
+    0% {left: 0%;}
+    23% {left: 0%;}
+    25% {left: -100%;}
+    48% {left: -100%;}
+    50% {left: 200%;}
+    73% {left: 200%;}
+    75% {left: 100%;}
+    98% {left: 100%;}
+    100% {left: 0%;}
+}
+
+@keyframes slide04 {
+    0% {left: 0%;}
+    23% {left: 0%;}
+    25% {left: 300%;}
+    48% {left: 300%;}
+    50% {left: 200%;}
+    73% {left: 200%;}
+    75% {left: 100%;}
+    98% {left: 100%;}
+    100% {left: 0%;}
+}
+/* -- 베너 슬라이드 효과 -- */
+
+/* -- 메인 글 크기, 위치 셋팅 -- */
+.mainContentsWrap ul li {
+    width: 200px;
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mainContentsWrap ul li button,
+.mainContentsWrap ul li button img,
+.mainContentsWrap ul li button span {
+    width: 100%;
+    height: 100%;
+}
+
+.mainContentsWrap ul  li{
+    margin: 15px;
+    box-shadow: 2px 2px 2px 2px #80808036;
+}
+
+.mainContentsWrap ul li button,
+.mainContentsWrap ul li button img,
+.mainContentsWrap ul li button span {
+    border: none;
+}
+
+.mainContentsWrap ul li button {
+    position: relative;
+    left: 0;
+}
+
+.mainContentsWrap ul li button span, .mainContentsWrap ul li button span p{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+}
+
+.mainContentsWrap ul li button span p {
+    padding: 20px;
+    opacity: 0;
+    line-height: 25px; /* 마우스 올렸을때 보이는 내용 글씨 상하 간격 - 내용 많을 시 다시 조정 하기*/
+}
+
+.mainContentsWrap ul li button:hover p{
+    cursor:pointer;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    opacity: 1;
+}
+
+.jellybutton {
+    width: 80px;
+    height: 41px;
+    color: #ed4848;
+    font-size: 15px;
+    cursor: pointer;
+    position: fixed;
+    right: 100px;
+    top: 600px;
+    padding: 10px;
+    background: none;
+    border-radius: 50px;
+    border: 1px solid whitesmoke;
+}
+
+.jellybutton:hover {
+    animation: jelly 0.6s ease;
+    border: 1px solid #ed4848;
+}
+
+.sidebtn1 {
+    top: 550px; /* jellybtn 변경시 -50px 같이 변경 해야 해서 여기로 배치 */
+}
+
+.centerHiddenContents { /* Q&A게시판 center 버튼 내용 기재 부분. center에 마우스 hover시 에만 보이게 */
+    top: 440px; /* jellybtn 변경시 -50px 같이 변경 해야 해서 여기로 배치 */
+    right: 50px;
+    width: 180px;
+    height: 100px;
+    border: 1px #ffffff33 solid;
+    background-color: #f5f5f500;
+    box-shadow: 0px 4px 5px -3px lightgrey;
+    display: none;
+}
+
+.reviewHiddenContents {/* 게시물 디테일페이지 리뷰 설명 내용. 마우스 hover시 에만 보이게 */
+    top: 390px; /* jellybtn 변경시 -50px 같이 변경 해야 해서 여기로 배치 */
+}
+
+.guideHiddenContents {
+    top: 360px;
+    width: 180px;
+    height: 180px;
+
+}
+
+.centerbtn:hover .centerHiddenContents {
+    display: block;
+}
+
+.centerHiddenContents p {
+    font-size: 10px;
+    line-height: 20px;
+    color: #551e1e;
+    text-align: center;
+}
+
+.reviewHiddenContents p {
+    font-size: 12px;
+}
+
+/* -- 메인 글 크기, 위치 셋팅 -- */
+
+
+/* -- more 버튼 효과 설정 -- */
+.btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid whitesmoke;
+    font-size: 13px;
+    color: #ed4848;
+    padding: 10px 20px;
+    width: 120px;
+    cursor: pointer;
+    position: relative;
+}
+
+.btn-swap span {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    padding: 13px 20px;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.btn-swap:hover span{
+    opacity: 1;
+    color: white;
+}
+
+.btn-swap::before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #ed4848;
+    border-radius: 8px;
+}
+
+.btn-swap:hover::before {
+    width: 100%;
+    transition: width 0.5s;
+
+}
+
+/* -- more 버튼 효과 설정 -- */
+
+
+/* ========================= */
+/* index-5 board(lost,find) list page
+	: 셋팅 찾아주세요, 찾아가세요 리스트 페이지 공통 적용 사항 */
+
+.wrapboardPage {
+    /* 	background-color: #fdfaf624; 게시판페이지 배경색상 비활성*/
+}
+
+#contentsMenu {
+    position: relative;
+    left: 10%;
+    top: 20px;
+}
+
+#contentsMenu i {
+    font-size: 15px;
+    padding: 0 5px 0 0;
+}
+
+#contentsMenu span {
+    padding: 0 10px;
+}
+
+#contentsMenu span:hover {
+    color: gold;
+}
+
+#contentsMenu span:hover i {
+    color: gold;
+}
+
+
+
+
+#contentsTitle {
+    text-align: center;
+    padding: 40px 0 30px 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentsTitleDetailPage {
+    text-align: center;
+    padding: 40px 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.wrapBoardlist {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapBoardlist ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 60%;
+    padding: 15px 0px 10px 0px;
+}
+
+.wrapBoardlist ul li {
+    width: 250px;
+    margin-bottom: 30px;
+    padding: 20px 30px 0px 23px;
+    border-radius: 10px;
+    text-align-last: center;
+}
+
+.wrapBoardlist ul li:hover {
+    box-shadow: 2px 5px 10px 6px #cccccc21;
+    cursor: pointer;
+}
+
+.img_box {
+    overflow: hidden;
+    border-radius: 8px;
+    border: none;
+    width: 200px;
+    height: 250px;
+}
+
+.img_box > img {
+    transition: transform 1.5s;
+    width: 200px;
+    height: 250px;
+}
+
+.wrapBoardlist ul li:hover img {
+    transform: scale(1.2);
+}
+
+.wrapBoardlist ul li:hover .img_box {
+    border: 1px solid #fed400;
+}
+
+
+.post-photo-top {
+    box-shadow: 2px 2px 10px 2px #80808036;
+    width: 200px;
+    height: 250px;
+    border-radius: 8px;
+}
+
+.post-photo-top img {
+    width: 200px;
+    height: 250px;
+    border: 1px solid whitesmoke;
+    border-radius: 8px;
+}
+
+.post-photo-top img:hover {
+    border: 1px solid #fed400;
+}
+
+.post-contents-bottom div {
+    display: flex;
+    padding-top: 20px;
+    justify-content: center;
+}
+
+.gratuity {
+    color: #ed4848;
+}
+
+.finishText {
+    color: #fed400;
+}
+
+
+
+
+
+
+/* ========================= */
+/* index-6 board(lost,find) write page
+	: 셋팅 찾아주세요, 찾아가세요 글작성 페이지 공통 적용 사항 */
+
+.wrapWritePage {
+    padding: 0 300px;
+}
+
+.wrapWritePage table {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 80px 0;
+}
+
+.wrapWritePage table tr td {
+    padding: 15px 30px;
+}
+
+.wrapWritePage table tr td span {
+    font-size: 18px;
+    color: red;
+}
+
+.wrapWritePage table tr td input {
+    width: 400px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+.wrapWritePage table tr td input:hover {
+    border: 1px solid #f7c180;
+    border-radius: 12px;
+}
+
+.wrapWritePage table tr td textarea {
+    border-radius: 8px;
+    border: 1px gray solid;
+    padding: 10px;
+}
+
+.wrapWritePage table tr td textarea:hover {
+    border: 1px solid #f7c180;
+    border-radius: 12px;
+}
+
+.wrapWritePage form > div {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 80px 0px;
+}
+
+.wrapWritePage form {
+    margin-bottom: 30px;
+    border: 1px double white;
+}
+
+.wrapWritePage form:hover {
+    border-top: 1px double silver;
+    transition: all 5.5s;
+}
+
+.writeTerms {
+    display: grid;
+}
+
+.completeBtn {
+    width: 300px;
+    height: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: #1ABC9C;
+    cursor: pointer;
+    border: 1px solid #dcdcdc;
+    box-shadow: 2px 3px 5px 0px #cccccc;
+}
+
+.completeBtn:hover {
+    border: 1px solid gray;
+    transition: all.3s;
+}
+
+
+.wrapWritePage input[type=file] {
+    border: none;
+    cursor: pointer;
+}
+
+.wrapWritePage input[type=file]:hover {
+    border: none;
+    border-radius: 0px;
+}
+
+.msg {
+    font-size: 12px;
+    color: cadetblue;
+}
+
+
+
+/* ========================= */
+/* index-7 board(lost,find) detail page
+	: 셋팅 찾아주세요, 찾아가세요 상세 페이지 공통 적용 사항 */
+
+.boardDetailPageLine{
+    display: inline-flex;
+    width: 200px;
+    border-bottom: 1px double #fed400;
+}
+
+.boardPage-contents ul {
+    display: flex;
+    justify-content: center;
+}
+
+.boardPage-contents ul li {
+    margin: 0 20px;
+}
+
+.post-contents-bottom {
+    padding: 50px 0;
+}
+
+.post-contents-bottom div {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.wrap-btns {
+    text-align: center;
+    padding: 50px 0;
+    /* border-top: 1px solid ghostwhite;*/
+    border-bottom: 1px solid #ebebebd9;
+    box-shadow: 1px 6px 8px 1px ghostwhite;
+}
+
+.lostPage-comment-top {
+    padding: 50px;
+    text-align: center;
+}
+
+.lostPage-comment-top h4 {
+    padding-bottom: 30px;
+}
+
+.lostPage-comment-bottom {
+    margin: 0 0 20px 0;
+    padding: 10px 500px;
+    background-color: #fdfaf645;
+    text-align-last: center;
+}
+
+.lostPage-comment-bottom ul {
+    margin-bottom: 20px;
+}
+
+.lostPage-comment-bottom ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid silver;
+    width: 90%;
+}
+
+.lostPage-comment-bottom textarea {
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 12px;
+    border: 1px silver solid;
+    box-shadow: 0px 10px 10px -5px whitesmoke;
+    padding: 10px 0;
+}
+
+.memo {
+    display: grid;
+    justify-items: center;
+}
+
+.memo p {
+    word-wrap: break-word;
+    line-height: 30px;
+    width: 30%;
+    border-radius: 8px;
+    border-top: 1px solid whitesmoke;
+    border-bottom: 1px solid whitesmoke;
+    padding: 20px;
+}
+
+
+.review {
+    display: none;
+}
+
+.review.active {
+    display: block;
+}
+
+.review form {
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FDFAF6;
+}
+
+.review form textarea {
+    width: 70%;
+    height: 300px;
+    margin: 50px 0;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.reviewContents p {
+    font-size: 15px;
+    color: #f68100;
+    line-height: 30px;
+    width: 30%;
+}
+
+.fa-quote-left, .fa-quote-right {
+    font-size: 15px;
+    color: #f68100;
+    margin: 0 10px;
+}
+
+.reviewContents {
+    display: flex;
+    justify-content: center;
+}
+
+
+.commentBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    /*     border-bottom: 1px solid whitesmoke;
+        position: relative;
+        top: -40px;
+        left: 46%; */
+    width: 40px;
+    height: 0px;
+    float: right;
+    position: relative;
+    top: -30px;
+    left: 10px;
+    margin: -10px 0;
+}
+
+.commentMod, .commentModFin {
+    left: -30px;
+}
+
+.commentBtn p {
+    font-size: 10px;
+    position: relative;
+    top: -38px;
+    color: #f68100;
+    display: none;
+    height: 0px;
+}
+
+.commentBtn:hover i {
+    color: #f68100;
+    animation: jelly 0.6s ease;
+}
+
+.commentBtn:hover p {
+    display: block;
+    /* 	animation: jelly 0.6s ease; */
+}
+
+#modifyContent{
+    border-radius: 7px;
+    height: 30px;
+    text-align-last: left;
+    border: 1px silver solid;
+}
+
+.wrapWritePage .fa-plus:hover, .wrapWritePage .fa-trash-alt:hover {
+    cursor: pointer;
+    color: #f7c180;
+}
+
+.wrapWritePage .fa-plus {
+    padding: 0 10px 0 0;
+}
+.wrapWritePage .fa-trash-alt {
+    padding: 0 10px;
+}
+
+
+
+
+
+
+/* ========================= */
+/* index-8 questionPage */
+
+.qaBx {
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* 페이징 아래로 내리기 */
+    align-items: center;
+    padding: 150px 0;
+}
+
+.qaBx table {
+    width: 50%;
+}
+
+.qaBx table tr {
+    height: 80px;
+    box-shadow: 0px 10px 10px -5px whitesmoke;
+}
+
+.qaBx table tr:first-of-type { /* .aqBxListTitle */
+    height: 70px;
+    box-shadow: 0px 10px 10px -5px whitesmoke;
+}
+
+.qaBxListTitle th {
+    font-weight: 100;
+    background: #064420;
+    color: white;
+    /* border: none; */
+}
+
+.qaBx table tr th, .qaBx table tr td {
+    text-align: center;
+    font-size: 13px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.qacontents {
+    background-color: #fdfaf67d;
+    line-height: 30px;
+}
+
+.qacontentsBx {
+    display: none;
+}
+
+.upBtnQa {
+    display: none;
+}
+
+.qacontentsBx.active {
+    display: table-row;
+}
+
+.upBtnQa.active {
+    display: block;
+}
+
+.dnBtnQa.active {
+    display: none;
+}
+
+.fa-angle-double-down, .fa-angle-up {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.qaBxContentsTitle {
+    width: 450px;
+}
+
+.qaBxContentsWriter {
+    width: 200px;
+}
+
+.qaBxContentsWriteDate {
+    width: 130px;
+}
+
+
+
+/* ========================= */
+/* index-9 servicePage folder */
+
+#bodyServicePate {
+    background-color: #2e2e2e;
+}
+
+.wrapServicePage .fa-accusoft {
+    font-size: 20px;
+    color: #a7a7a7;
+}
+
+.wrapServicePage .mainTitle p a {
+    color: #a7a7a7;
+}
+
+.servicePageHeaderTop {
+    padding: 20px 0;
+}
+
+.btnServicePage [class*='sidebtn'] {
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    position: fixed;
+    right: 100px;
+    padding: 10px;
+    background: none;
+    color: grey;
+    text-align: center;
+    border: none;
+}
+
+.btnServicePage [class*='sidebtn']:hover {
+    border-bottom: 2px double snow;
+    color: snow;
+    transition: all 0.8s;
+    margin: -5px 0;
+}
+
+.sidebtn0 {
+    top: 600px; /* 변경시 jellybtn -50px 같이 변경 해야 함 */
+}
+
+.sidebtn3 {
+    top: 550px; /* 변경시 jellybtn -50px 같이 변경 해야 함 */
+}
+
+.sidebtn4 {
+    top: 500px; /* 변경시 jellybtn -50px 같이 변경 해야 함 */
+}
+
+.sidebtn5 {
+    top: 450px; /* 변경시 jellybtn -50px 같이 변경 해야 함 */
+}
+
+.sidebtn6 {
+    top: 400px; /* 변경시 jellybtn -50px 같이 변경 해야 함 */
+}
+.sidebtn7 {
+    top: 500px; /* 변경시 jellybtn -50px 같이 변경 해야 함 - 이건 리뷰 버튼*/
+}
+
+.sectionServicePage div h2 {
+    color: snow;
+    text-align: center;
+    padding: 10px 300px;
+    letter-spacing: 6px;
+    font-size: 18px;
+}
+
+.sectionServicePage div p {
+    color: snow;
+    text-align: center;
+    padding: 10px 300px;
+    letter-spacing: 5px;
+    line-height: 50px;
+    font-size: 15px;
+}
+
+.sectionServicePage div {
+    padding: 300px 0;
+    border-bottom: 1px double dimgray;
+    /* box-shadow: 0px 10px 10px -5px #ffffff1a; */
+}
+
+.sectionServicePage .fa-accusoft {
+    font-size: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================= */
+/* index-10 admin-include folder */
+.headerAdmin {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    font-size: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.headerAdmin p img {
+    height: 40px;
+    width: 40px;
+    padding-right: 10px;
+}
+
+.adminNav ul{
+    display: flex;
+}
+
+.adminNav ul li {
+    padding: 15px 100px;
+    background-color: white;
+}
+
+.adminNav ul li:hover {
+    cursor: pointer;
+    background-color: #fed400;
+    color: navy;
+    border-radius: 10px;
+}
+
+
+
+/* ========================= */
+/* index-11 admin folder : login - main - board - member - q&a */
+
+.adminLoginTitle {
+    padding: 5% 0% 3% 0%;
+    font-size: 20px;
+    padding-left: 50%;
+}
+
+.wrapAdminLogin {
+    width: 100%;
+    padding-left: 40%;
+}
+
+.adminLogin_bx {
+    height: 300px;
+    width: 500px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.adminLogin_bx form {
+    padding-top: 10%;
+    padding-left: 18%;
+}
+
+.admin_id input, .admin_pwd input, .admin_submit input {
+    border-radius: 8px;
+    width: 80%;
+    height: 40px;
+    margin : 2% 0%;
+}
+
+.admin_submit input {
+    margin-top: 5%;
+    color: white;
+    background-color: #064420;
+}
+
+.admin_submit input:hover {
+    cursor: pointer;
+}
+
+/* 어드민 로그인 후 메인 페이지 */
+
+.adminMainWrap { /*공지사항*/
+    padding: 20px 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.wrapAdminLogin {
+    width: 100%;
+    padding-left: 40%;
+}
+
+.adminLogin_bx {
+    height: 300px;
+    width: 500px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.line{
+    width: 1px;
+    height: 800px;
+    border-left: 1px solid gray ;
+}
+
+.adminWrap {
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.left {
+    width: 200px;
+    text-align: center;
+}
+
+.left div:first-child{
+    border-bottom: 1px solid gray;
+    height: 50px;
+    line-height: 40px;
+}
+
+.adminTitle{
+    font-size: 20px;
+}
+
+.left div:not(.left div:first-child) ul {
+    margin: 20px 0;
+}
+
+.left div:not(.left div:first-child) ul li {
+    padding: 20px 0;
+}
+
+.left div:not(.left div:first-child) ul li:hover {
+    cursor: pointer;
+    background-color: #fed400;
+    border-radius: 10px;
+}
+
+.right {
+    width: 100%;
+}
+
+.right div p input {
+    border-radius: 5px;
+    border: 1px gray solid;
+    position: absolute;
+    right: 60px;
+    top: 155px;
+}
+
+.right div p img {
+    position: absolute;
+    right: 40px;
+    top: 155px;
+}
+
+.right > div:first-child{
+    border-bottom: 1px solid gray;
+    height: 50px;
+    line-height: 40px;
+    font-size: 15px;
+    padding-left: 20px;
+}
+
+.right div:not(.right div:first-child) { /*날짜, 선택란 부분*/
+    padding: 10px;
+}
+
+.right div input {
+    margin: 0 20px;
+}
+
+.right div label {
+    cursor: pointer;
+}
+
+.adminContents {
+    padding: 0px 0 20px 0;
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid gray;
+}
+
+.adminContents tbody tr td {
+    padding: 15px 0;
+}
+
+.adminContentsListTitle td {
+    border-bottom: 1px solid #c0c0c0;
+    font-size: 15px;
+}
+
+.adminContents tr:not(tr:first-child):hover {
+    background-color: #fed400;
+}
+
+.adminContents tr:not(tr:first-child):hover a {
+    color: white;
+}
+
+
+
+
+/* ========================= */
+/* index-12 admin folder : detail pages setting */
+
+.wrapContents {
+    padding-top: 10px;
+}
+
+.adminBoardDetailBtn { /* 버튼 어드민페이지 공통 */
+    position: fixed;
+    top: 300px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.wrapEditMemberPage table {
+    margin: 20px;
+}
+
+.wrapEditMemberPage table tr td span {
+    font-size: 18px;
+    color: red;
+}
+
+.wrapEditMemberPage table tr td input {
+    width: 400px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.qnaBtn {
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    color: gray;
+    cursor: pointer;
+    background-color:white;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    top: 205px;
+    right: 20px;
+}
+
+.qnaBtn:hover {
+    width: 85px;
+    background-color: #fed400;
+    color: navy;
+    border: 1px solid navy;
+    /* 	border: 1px solid #fed400;
+        color: #fed400; */
+}
+
+.qnaOpen select {
+    width: 400px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin: 0 20px;
+    text-align-last: center;
+}
+
+.questionDetailContents p {
+    border-top: 1px solid #fed400;
+    padding: 10px 0;
+    width: 90%;
+}
+
+.adminBoardDetail h3 {
+    position: relative;
+    left: 20px;
+    color: silver;
+    width: 108px;
+    background-color: white;
+}
+
+.adminBoardDetailContents {
+    border: 1px solid silver;
+    width: 85%;
+    position: relative;
+    top: -20px;
+    z-index: -1;
+}
+
+.adminBoardDetailContentsIcon {
+    color: #a7a7a7;
+    font-size: 10px;
+}
+
+.adminMemberDetail h3 {
+    position: relative;
+    left: 20px;
+    color: silver;
+    width: 120px;
+    background-color: white;
+}
+
+.adminMemberDetailContents {
+    border: 1px solid silver;
+    width: 85%;
+    position: relative;
+    top: -10px;
+    z-index: -1;
+}
+
+.adminMemberDetailContentsIcon {
+    color: #a7a7a7;
+    font-size: 10px;
+}
+
+.adminMemberDetailContents label div p {
+    padding: 20px 10px;
+}
+
+/* ========================= */
+/* index-13 myPage */
+
+@keyframes twinkle {
+    0% {color:#ea8d8d; bottom: 0px;}
+    50% {color:#ea8d8d; bottom: 5px;}
+    100% {color:#a890fe; bottom: -2px;}
+}
+
+@keyframes twinkle2 {
+    0% {color:yellow; bottom: 0px;}
+    50% {color:#ffe400; bottom: 5px;}
+    100% {color:#fed400; bottom: -2px;}
+}
+
+
+.clickText {
+    position: relative;
+    opacity: 0;
+    margin: 0 0 0 5px;
+}
+
+.clickTextDisplay {
+    opacity: 1;
+    transition: all 1s;
+    animation: twinkle2 1s infinite cubic-bezier(0.4, 0, 1, 1);
+}
+
+.myPage {
+    padding: 80px 0;
+}
+
+.wrapMyInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.myPage h1 {
+    text-align: center;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.myPage h3 {
+    font-weight: 100;
+    font-size: 15px;
+    padding: 0 0 15px 26%;
+}
+
+.myInfo {
+    background-color: #fbfbfb;
+    width: 50%;
+    height: 250px;
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    line-height: 30px;
+}
+
+.fa-dove {
+    color: pink;
+    font-size: 30px;
+    padding: 20px;
+    margin: 0 20px 0 0;
+    border-radius: 50px;
+    border: 1px solid pink;
+}
+
+.myGrade {
+    display: flex;
+    align-items: center;
+}
+
+.changeMyInfodToggle {
+    cursor: pointer;
+}
+
+
+
+.myPostTitle:hover .clickText {
+    opacity: 1;
+    transition: all 1s;
+    animation: twinkle 1s infinite cubic-bezier(0.4, 0, 1, 1);
+}
+
+
+.changeInfoBtn {
+    padding-left: 10px;
+    position: relative;
+    top: 15px;
+    left: 60%;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.myInfoUpdatePageBtn {
+    position: relative;
+    top: -50px;
+    left: 10%;
+}
+
+.changeMyInfodToggle:hover .clickText {
+    opacity: 1;
+    transition: all 1s;
+    animation: twinkle 1s infinite cubic-bezier(0.4, 0, 1, 1);
+}
+
+.changeInfoBtn:hover .clickText {
+    opacity: 1;
+    transition: all 1s;
+    animation: twinkle 1s infinite cubic-bezier(0.4, 0, 1, 1);
+}
+
+.changeInfoBtn:hover .editIcon {
+    animation: jelly 0.6s ease;
+    color: pink;
+}
+
+
+
+.myActivities {
+    border-left: 1px solid #d0d0d0;
+    padding: 0 0 0 30px;
+}
+
+.myActivitiesTitle {
+    border-bottom: 1px solid black;
+}
+
+.wrapMyActivitiesContents {
+    display: flex;
+}
+
+.myActivitiesContents p:first-child {
+    border-bottom: 1px dashed #d0d0d0;
+}
+
+.myActivitiesContents p {
+    padding: 10px 50px 10px 5px;
+}
+
+.wrapMyPost h3 span {
+    padding-left: 10px;
+    font-size: 12px;
+    color: #ed4848;
+}
+
+.myPost {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 50px 0;
+}
+
+.myPostBx {
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid lightgrey;
+    width: 50%;
+    padding: 0 70px;
+}
+
+.myPostBx div div {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px dashed whitesmoke;
+}
+
+
+.wrapMyInfoDetail {
+    display: none;
+    margin: -10px 0 100px 0;
+}
+
+.wrapMyInfoDetail.active {
+    display: block;
+}
+
+.myInfoDetail {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.myInfoDetailContents {
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid lightgrey;
+    width: 50%;
+    padding: 0 70px;
+}
+
+.myInfoDetailContents div div {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px dashed whitesmoke;
+}
+
+.myInfoDetailContents div div p {
+    width: 115px;
+    text-align: center;
+}
+
+.editIcon {
+    padding: 0 5px ;
+    color: grey;
+}
+
+
+
+
+/* ======회원정보수정 페이지======== */
+
+
+.myInfoUpdatePage .myInfoDetail {
+    margin: 25px 0
+}
+
+.myInfoUpdate {
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid lightgrey;
+    width: 50%;
+    padding: 0 70px;
+    margin: 50px 0;
+}
+
+.myInfoUpdate form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.myInfoUpdate form table {
+    margin: 30px 0 50px 0;
+}
+
+.myInfoUpdate form table tbody tr td {
+    padding: 15px 10px;
+}
+
+.myInfoUpdate form table tbody tr td input {
+    width: 250px;
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid grey;
+    text-align: center;
+    color: currentColor;
+}
+
+.myInfoUpdate form table tbody tr td input:hover {
+    color: palevioletred;
+}
+
+.myInfoUpdate form table tbody tr td input:hover {
+    border-bottom: 1px solid palevioletred;
+}
+
+.myInfoUpdateIcon {
+    padding: 0 10px 0 0;
+    color: gray;
+}
+
+.myInfoUpdate form table tr:hover .myInfoUpdateIcon {
+    color: palevioletred;
+    font-size: 15px;
+    padding: 0 7px 0 0;
+}
+
+.myInfoUpdate form table tr:hover td {
+    color: palevioletred;
+}
+
+.myInfoUpdateNotice p {
+    margin: 15px 0;
+}
+
+.fa-info {
+    color: lightcoral;
+    padding: 0 10px 0 0;
+}
+
+/* ============비번수정페이지============= */
+
+.myPasswordUpdatePageBtn {
+    position: relative;
+    left: 10%;
+}
+
+.changePassword {
+    width: 100%;
+    display: contents;
+}
+
+
+.changePasswordContents {
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid lightgrey;
+    background-color: #fbfbfb52;
+    width: 50%;
+    text-align: center;
+    padding: 80px 0;
+}
+
+.changePasswordContents div {
+    padding: 15px 0;
+}
+
+
+
+.changePasswordContents input[id*='userPassword'] {
+    padding: 5px 20px;
+    margin: 0 0 0 20px;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+.changePasswordContents input[id*='userPassword']:hover {
+    border: 1px solid palevioletred;
+    border-radius: 10px;
+}
+
+
+
+.changePasswordBtn {
+    padding: 10px 5px;
+    margin: 50px 0 0 0;
+    border:none;
+    border-radius: 10px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    background: none;
+}
+
+.changePasswordBtn:hover {
+    cursor: pointer;
+    color: palevioletred;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid palevioletred;
+    transition: all 0.5s;
+    border-radius: 15px;
+}
+
+/* ========================= */
+/* index-14 사이즈 조정 */
+
+@media screen and (max-width: 1600px) {
+    .signUpCommandTitle {  /* 회원가입 페이지 사이즈 축소 시 입력창 옆 내용 안보이기 */
+        display: none
+    }
+
+
+}
+
+@media screen and (max-width: 1500px) {
+    .lostPage-comment-bottom {
+        padding: 10px 300px;
+    }
+
+    .qaBxContentsWriter, .qaBxContentsWriteDate  {
+        display: none;
+    }
+
+    .wrapWritePage table tr td:first-of-type {  /* 글작성 페이지 사이즈 축소 시 입력창 옆 내용 안보이기 */
+        display: none
+    }
+
+    .lostPage-comment-bottom ul li p:last-of-type {
+        display: none;
+    }
+
+}
+
+
+@media screen and (max-width: 1120px) {
+    .navInner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mainMenu, .search {
+        display: none;
+    }
+
+    .navToggleBtn {
+        display: block;
+        position: absolute;
+        top: 95px;
+        right: 40px;
+        z-index: 1;
+    }
+
+    .mainMenu ul{
+        position: absolute;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .mainMenu a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .mainMenu.active {
+        display: flex;
+    }
+
+    .fa-bars { /*햄버거 크기조정*/
+        font-size: 25px;
+    }
+
+
+
+
+}
+
+
+
+@media screen and (max-width: 599px) {
+
+    .footerUpper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    .footerMenu ul, .footerIcon ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* ~~ 사이즈 조정 */

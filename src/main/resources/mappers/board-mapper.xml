@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.common.mapper.board.BoardMapper">
+
+    <select id="getBoardList" parameterType="boardDto" resultType="boardDto">
+        SELECT
+            seq,
+            title,
+            writer,
+            pet_name,
+            pet_location,
+            pet_time,
+            pet_type,
+            pet_meet,
+            thumbnail_file_name
+        FROM
+            (
+                SELECT
+                    b.seq,
+                    b.title,
+                    m.id as writer,
+                    b.pet_name,
+                    b.pet_location,
+                    b.pet_time,
+                    b.pet_type,
+                    b.pet_meet,
+                    b.thumbnail_file_name,
+                    ROW_NUMBER()
+                    OVER(
+                    ORDER BY
+                    b.seq DESC
+                    ) AS rnum
+                FROM
+                    board b JOIN member m
+                    on b.member_seq = m.seq
+                WHERE
+                    contents_type = #{contents_type}
+                    <if test="searchKeyword !='' and searchKeyword !=null and searchOption == 'title'">
+                        AND b.title like '%' ||  #{searchKeyword} || '%'
+                    </if>
+                    <if test="searchKeyword !='' and searchKeyword !=null and searchOption == 'name'">
+                        AND b.pet_name like '%' ||  #{searchKeyword} || '%'
+                    </if>
+                    <if test="searchKeyword !='' and searchKeyword !=null and searchOption == 'writer'">
+                        AND m.id = #{searchKeyword}
+                    </if>
+                    <if test="state !='' and state !=null and pet_meet != 2">
+                        AND b.pet_meet = #{pet_meet}
+                    </if>
+            )
+        WHERE
+            rnum BETWEEN #{rowStart} AND #{rowEnd}
+    </select>
+
+    <insert id="insertBoard" parameterType="boardDto">
+        <selectKey keyProperty="seq" resultType="int" order="BEFORE">SELECT board_seq.NEXTVAL FROM dual</selectKey>
+        INSERT INTO board (
+            seq,
+            member_seq,
+            contents_type,
+            title,
+            pet_location,
+            pet_time,
+            pet_type,
+            pet_name,
+            pet_gender,
+            pet_memo,
+            phone_public,
+            email_public,
+            pet_meet,
+            hit,
+            reg_date
+        ) VALUES (
+            #{seq},
+            #{member_seq},
+            #{contents_type},
+            #{title},
+            #{pet_location},
+            #{pet_time},
+            #{pet_type},
+            #{pet_name},
+            #{pet_gender},
+            #{pet_memo},
+            #{phone_public},
+            #{email_public},
+            '0',
+            0,
+            sysdate
+        )
+    </insert>
+
+    <insert id="insertBoardImg" parameterType="boardImgDto">
+        INSERT INTO image (
+            seq,
+            board_seq,
+            original_file,
+            original_file_extension,
+            stored_file_name
+        ) VALUES (
+            image_seq.nextval,
+            #{board_seq},
+            #{original_file},
+            #{original_file_extension},
+            #{stored_file_name})
+    </insert>
+
+    <update id="updateThumbnailFile" parameterType="boardDto">
+        UPDATE board
+        SET THUMBNAIL_FILE_NAME = #{thumbnail_file_name}
+        WHERE seq = #{seq}
+    </update>
+
+    <update id="updateHits" parameterType="int">
+        UPDATE board
+        SET hit = hit+1
+        WHERE seq = #{seq}
+    </update>
+
+    <select id="getBoardDetail" parameterType="int" resultType="boardDto">
+        SELECT
+            board.seq,
+            contents_type,
+            title,
+            pet_location,
+            pet_time,
+            pet_type,
+            pet_name,
+            pet_gender,
+            pet_memo,
+            pet_meet,
+            phone_public,
+            email_public,
+            review,
+            hit,
+            reg_date,
+            m.id as writer,
+            m.phone as phone,
+            m.email as email
+        FROM board join member m
+            on board.member_seq = m.seq
+        WHERE board.seq = #{seq}
+    </select>
+
+    <select id="getBoardDetailImages" parameterType="int" resultType="boardImgDto">
+        SELECT
+            *
+        FROM image
+        WHERE board_seq = #{seq}
+    </select>
+
+    <select id="getBoardDetailComments" parameterType="int" resultType="boardCommentDto">
+        SELECT
+            c.seq,
+            c.board_seq,
+            c.memo,
+            c.reg_date,
+            m.id as writer
+        FROM comments c join member m
+            on c.member_seq = m.seq
+        WHERE board_seq = #{seq}
+        ORDER BY c.seq DESC
+    </select>
+
+    <update id="updateBoard" parameterType="boardDto">
+        UPDATE board
+        SET
+            title = #{title},
+            pet_name = #{pet_name},
+            pet_type = #{pet_type},
+            pet_gender = #{pet_gender},
+            pet_location = #{pet_location},
+            phone_public = #{phone_public},
+            email_public = #{email_public},
+            pet_time = #{pet_time},
+            pet_memo = #{pet_memo}
+        WHERE SEQ = #{seq}
+    </update>
+
+    <delete id="deleteImg" parameterType="int">
+        DELETE
+        FROM image
+        WHERE seq = #{seq}
+    </delete>
+
+    <delete id="deleteAllImg" parameterType="int">
+        DELETE
+        FROM image
+        WHERE board_seq = #{seq}
+    </delete>
+
+    <delete id="deleteAllComment" parameterType="int">
+        DELETE
+        FROM comments
+        WHERE board_seq = #{seq}
+    </delete>
+
+    <delete id="deleteBoard" parameterType="int">
+        DELETE
+        FROM board
+        WHERE seq = #{seq}
+    </delete>
+
+    <update id="updateState" parameterType="boardDto">
+        UPDATE board
+        SET pet_meet = #{pet_meet}
+        WHERE seq = #{seq}
+    </update>
+
+    <update id="updateReview" parameterType="boardDto">
+        UPDATE board
+        SET review = #{review}
+        WHERE seq = #{seq}
+    </update>
+
+    <insert id="writeComment" parameterType="boardCommentDto">
+        INSERT INTO comments (
+            seq,
+            board_seq,
+            member_seq,
+            memo,
+            reg_date
+        ) VALUES (
+            comments_seq.nextval,
+            #{board_seq},
+            #{member_seq},
+            #{memo},
+            sysdate
+        )
+    </insert>
+
+    <update id="modifyComment" parameterType="boardCommentDto">
+        UPDATE comments
+        SET memo = #{memo}
+        WHERE seq = #{seq}
+    </update>
+
+    <delete id="deleteComment" parameterType="int">
+        DELETE
+        FROM comments
+        WHERE seq = #{seq}
+    </delete>
+
+
+
+</mapper>

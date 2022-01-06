@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <typeAliases>
+        <typeAlias alias="mainDto" type="com.common.dto.main.MainDto"/>
+        <typeAlias alias="boardDto" type="com.common.dto.board.BoardDto"/>
+        <typeAlias alias="boardImgDto" type="com.common.dto.board.BoardImgDto"/>
+        <typeAlias alias="boardCommentDto" type="com.common.dto.board.BoardCommentDto"/>
+        <typeAlias alias="signUpDto" type="com.common.dto.enter.SignUpDto"/>
+        <typeAlias alias="memberDto" type="com.common.dto.enter.MemberDto"/>
+        <typeAlias alias="searchCriteriaMainBoard" type="com.common.dto.paging.SearchCriteriaMainBoard"/>
+    </typeAliases>
+
+</configuration>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.common.mapper.myPage.MyPageMapper">
+
+    <select id="getMyPosts" parameterType="boardDto" resultType="boardDto">
+        SELECT
+            b.seq,
+            b.pet_meet,
+            b.title,
+            (SELECT COUNT(*) FROM comments WHERE board_seq = b.seq ) AS commentNum,
+            b.reg_date
+        FROM
+            board b
+        WHERE
+            b.contents_type = #{contents_type}
+            AND b.member_seq = #{member_seq}
+    </select>
+
+    <update id="updatePassword" parameterType="memberDto">
+        UPDATE member
+        SET
+            password = #{passwordNew},
+            salt = #{salt}
+        WHERE seq = #{seq}
+    </update>
+
+    <update id="updateMyInfo" parameterType="memberDto">
+        UPDATE member
+        SET
+            phone = #{phone},
+            email = #{email}
+        WHERE seq = #{seq}
+    </update>
+
+</mapper>

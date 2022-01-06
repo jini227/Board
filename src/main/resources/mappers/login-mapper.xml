@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.common.mapper.enter.LoginMapper">
+    <insert id="insertMember" parameterType="signUpDto">
+        INSERT INTO member (
+            seq,
+            id,
+            password,
+            name,
+            phone,
+            email,
+            role,
+            salt
+        ) VALUES (
+            member_seq.nextval,
+            #{id},
+            #{password},
+            #{name},
+            #{phone},
+            #{email},
+            'public',
+            #{salt}
+        )
+    </insert>
+
+    <select id="idChk" parameterType="String" resultType="integer">
+        SELECT COUNT(*) FROM MEMBER WHERE ID = #{id}
+    </select>
+
+    <select id="getMemberInfo" parameterType="String" resultType="memberDto">
+        SELECT * FROM MEMBER WHERE ID = #{id}
+    </select>
+
+</mapper>
