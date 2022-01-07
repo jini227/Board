@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../../resources/css/style.css">
     <script src="../../resources/script/script.js" defer></script>
+    <link rel="shortcut icon" href="#">
     <title>${detail.title}</title>
 </head>
 <body>
@@ -42,11 +43,18 @@
             </ul>
             <div class="post-contents-bottom">
                 <!-- 게시글 내용 나오는 부분 -->
+                <span id="pet-meet">
                 <c:if test="${detail.pet_meet==1}">
-                    <div>
-                        <p class="finishText">발견완료</p>
-                    </div>
+                <div>
+                    <p class="finishText">발견완료</p>
+                </div>
                 </c:if>
+                <c:if test="${detail.pet_meet!=1}">
+                <div>
+                    <p class="finishText" style="color: silver;">미발견</p>
+                </div>
+                </c:if>
+                </span>
                 <div class="userid-writetime-anumber-view">
                     <p>작성자 ${detail.writer}님 | ${detail.reg_date}</P>
                 </div>
@@ -84,31 +92,24 @@
                     <p style="white-space: pre-line;">${detail.pet_memo}</p>
                 </div>
 
-                <c:if test="${detail.pet_meet==1 and not empty detail.review}">
-                    <div class="reviewContents">
-                        <p style="white-space: pre-line;">
-                            <i class="fas fa-quote-left"></i>${detail.review}<i class="fas fa-quote-right"></i>
-                        </p>
-                    </div>
-                </c:if>
+                <div class="reviewContents">
+                    <p style="white-space: pre-line;">
+                        <i class="fas fa-quote-left"></i><span class="reviewText">${detail.review}</span><i class="fas fa-quote-right"></i>
+                    </p>
+                </div>
             </div>
         </div>
 
         <div class="wrap-btns">
             <!-- 버튼들 모음 -->
             <!-- 로그인한 사람이 본인 글에 들어왔을때만 보이는 버튼들 추가 -->
-            <button class="btn btn-swap" name="toList" id="toList"
-                    onclick="location='<c:url value="/board/boardList/${detail.contents_type}"/>'">
-                목록으로<span>목록으로 >></span></button>
+            <button class="btn btn-swap" name="toList" id="toList" onclick="location='<c:url value="/board/boardList/${detail.contents_type}"/>'">LIST<span>목록으로 >></span></button>
             <c:if test="${memberAuthInfo.id eq detail.writer}">
-                <button class="btn btn-swap" name="delete" id="delete" onclick="del()">글삭제<span>글삭제 >></span></button>
+                <button class="btn btn-swap" name="delete" id="delete" onclick="del()">DELETE<span>글삭제 >></span></button>
                 <button class="btn btn-swap" name="modify" id="modify"
-                        onclick="location='<c:url value="/board/boardModify/${detail.seq}"/>'">글수정<span>글수정 >></span>
+                        onclick="location='<c:url value="/board/boardModify/${detail.seq}"/>'">MODIFY<span>글수정 >></span>
                 </button>
-                <button class="btn btn-swap" name="meet" id="meet" onclick="state(${detail.pet_meet})">
-                    <c:if test="${detail.pet_meet eq 0}">발견완료</c:if><c:if
-                        test="${detail.pet_meet eq 1}">미발견</c:if><span>변경 >></span>
-                </button>
+                <button class="btn btn-swap" name="meet" id="meetBtn">STATE<span>변경 >></span></button>
             </c:if>
         </div>
 
@@ -202,24 +203,87 @@
 
 <!-- 리뷰버튼 -->
 <c:if test="${memberAuthInfo.id eq detail.writer}">
-    <c:if test="${detail.pet_meet eq 1}">
-        <div class="centerbtn">
-            <div class="jellybutton centerHiddenContents reviewHiddenContents" name="centerHiddenContents"
-                 id="centerHiddenContents">
-                <p>
-                    INFO<br>! 리뷰를 작성해주세요 <br>
-                    ! 리뷰 버튼 클릭 시 리뷰 작성 혹은 수정 가능 합니다.
-                </p>
-            </div>
-            <button class="jellybutton sidebtn7 reviewToggleBtn" name="review" id="review" onclick="window.scrollTo(800,800)">REVIEW
-            </button>
+    <div class="centerbtn reviewBtnToggle">
+        <div class="jellybutton centerHiddenContents reviewHiddenContents" name="centerHiddenContents"
+             id="centerHiddenContents">
+            <p>
+                INFO<br>! 리뷰를 작성해주세요 <br>
+                ! 리뷰 버튼 클릭 시 리뷰 작성 혹은 수정 가능 합니다.
+            </p>
         </div>
-    </c:if>
+        <button class="jellybutton sidebtn7 reviewToggleBtn" name="review" id="review" onclick="window.scrollTo(800,800)">REVIEW
+        </button>
+    </div>
 </c:if>
 
 
 <script>
     $(document).ready(function () {
+
+        // 리뷰 내용, 리뷰 버튼 변수 세팅
+        var reviewContents = document.querySelector('.reviewContents');
+        var reviewBtnToggle = document.querySelector('.reviewBtnToggle');
+
+        meetToggle(); // 페이지 첫 진입 시 미발견일 경우만 if문 통해 리뷰내용과 버튼이 안보이도록 세팅
+
+        function meetToggle() {
+            var state = $(".finishText").text();
+            if (state != '발견완료') {
+                console.log('log. state is not found.')
+                reviewContents.classList.toggle('active');
+                reviewBtnToggle.classList.toggle('active');
+            }
+        }
+
+        // 발견상태 변경 버튼 클릭 시
+        $("#meetBtn").on("click", function () {
+            var state = $(".finishText").text();
+            var chk = true;
+            var seq = ${detail.seq};
+            var pet_meet = 0;
+
+            console.log(state)
+            if (state == '발견완료') {
+                chk = confirm("'미발견'으로 변경 하시겠습니까?");
+                pet_meet = 0;
+            } else if (state == '미발견') {
+                chk = confirm("'발견완료'로 변경 하시겠습니까?");
+                pet_meet = 1;
+            }
+
+            if (chk) {
+                $.ajax({
+                    type: "GET",
+                    url: "updateState",
+                    data: {
+                        "seq": seq,
+                        "pet_meet": pet_meet
+                    },
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        if(result == 1) {
+                            var output = "<div>";
+                            output += '<p class="finishText">발견완료</p>';
+                            output += "</div>";
+                            $("#pet-meet").html(output);
+                            reviewContents.classList.toggle('active');
+                            reviewBtnToggle.classList.toggle('active');
+                        } else if (result == 0) {
+                            var output = "<div>";
+                            output += '<p class="finishText" style="color: silver">미발견</p>';
+                            output += "</div>";
+                            $("#pet-meet").html(output);
+                            reviewContents.classList.toggle('active');
+                            reviewBtnToggle.classList.toggle('active');
+                        }
+                    },
+                    error: function () {
+                        console.log("ajax 통신 실패");
+                    }
+                });
+            }
+        });
 
         // 댓글 쓰기 버튼 클릭 시
         $("#uploadComment").on("click", function () {
@@ -230,9 +294,8 @@
                 if (!text) {
                     alert('내용을 입력해주세요.')
                 } else {
-                    var boardSeq =${detail.seq};
+                    var boardSeq = ${detail.seq};
                     var loginSeq = "${loginSeq}";
-
                     $.ajax({
                         type: "POST",
                         url: "writeComment",
@@ -242,32 +305,21 @@
                             "text": text
                         },
                         success: function (result) {
-                            var msg;
-
-                            switch (result) {
-                                case 1 :  //성공
-                                    msg = "댓글이 등록되었습니다.";
-                                    // 내용을 작성한 textarea를 다 지워줌
-                                    $("#content").val("");
-                                    selectRlist(); // selectRlist()함수 호출
-                                    break;
-
-                                case 0 :  //등록실패
-                                    msg = "댓글 등록에 실패했습니다.";
-                                    break;
+                            if (result == 1) {
+                                alert("댓글이 등록 되었습니다.");
+                                $("#content").val("");
+                                selectRlist();
+                            } else {
+                                alert("댓글 등록에 실패했습니다.");
                             }
-                            alert(msg);
                         },
                         error: function () {
                             console.log("ajax 통신 실패");
-                            msg = "ajax 통신 실패";
-                            alert(msg);
                         }
                     });
                 }
             }
         });
-
         // 댓글 수정
         $("#lostPage-comment-bottom").on("click", ".commentMod", function modifyClick() {
             var div = $("#comment-modify");
@@ -277,7 +329,6 @@
             var fin = $("#commentModFin");
             var con = li.children('.con').text();
             var p = li.children('p');
-
             // 수정작업 중 다른 수정 버튼 클릭 시
             if (num == 0) {
                 // 이전에 체크된 부분탐색
@@ -286,7 +337,6 @@
                 var move = ul.find("#commentModFin");
                 var prevBtn = move.prev();
                 var prevP = mod_con.nextAll('p');
-
                 li.prepend(cArea);
                 $(this).after(fin);
                 prevP.show();
@@ -295,7 +345,6 @@
                 $(this).hide();
                 cArea.val(con);
             }
-
             // 정상적인 경로
             if (num == 2) {
                 li.prepend(cArea);
@@ -307,16 +356,13 @@
                 cArea.val(con);
             }
         });
-
         $("#lostPage-comment-bottom").on("click", ".commentModFin", function () {
-
             var memo = $('#modifyContent').val();
             var input = $(this).prev().prev();
             var seq = input.val();
             var c = $("#modifyContent");
             var div = $("#comment-modify");
             var but = $("#commentModFin");
-
             $.ajax({
                 type: "POST",
                 url: "modifyComment",
@@ -325,35 +371,26 @@
                     "memo": memo
                 },
                 success: function (result) {
-                    var msg;
-
-                    switch (result) {
-                        case 1: //성공
-                            msg = "댓글이 수정되었습니다.";
-                            div.prepend(c);
-                            div.prepend(but);
-                            selectRlist();
-                            break;
-
-                        case 0: //실패
-                            msg = "댓글 수정에 실패했습니다.";
-                            break;
+                    if (result == 1) {
+                        alert("댓글이 수정 되었습니다");
+                        div.prepend(c);
+                        div.prepend(but);
+                        selectRlist();
+                    } else {
+                        alert("댓글이 수정에 실패했습니다.");
                     }
-                    alert(msg);
                 },
                 error: function () {
                     console.log("ajax 통신 실패");
                 }
             });
         });
-
         // 댓글 삭제
         $("#lostPage-comment-bottom").on("click", ".commentDel", function () {
             var chk = confirm("해당 댓글을 정말 삭제하시겠습니까?");
             if (chk) {
                 var input = $(this).prev().prev();
                 var seq = input.val();
-
                 $.ajax({
                     type: "GET",
                     url: "deleteComment",
@@ -367,18 +404,15 @@
                 });
             }
         });
-
         // 댓글 목록 조회 함수
         function selectRlist() {
             var boardSeq = "${detail.seq}";
-
             $.ajax({
                 url: "commentList",
                 type: "POST",
                 data: {"boardSeq": boardSeq},
                 dataType: "json",
                 success: function (comments) {
-                    console.log(comments);
                     var output = "<ul>";
                     for (var i in comments) {
                         output += "<li>";
@@ -412,24 +446,6 @@
         }
     }
 
-    // 발견완료/미발견 변경시 확인 알람
-    function state(meet) {
-        if (meet == 1) {
-            var chk = confirm("'미발견'으로 변경 하시겠습니까?");
-        } else {
-            var chk = confirm("'발견완료'로 변경 하시겠습니까?");
-        }
-
-        if (chk) {
-            location.href = "<c:url value='/board/updateState/${detail.seq}&${detail.pet_meet}'/>";
-            alert("변경되었습니다.");
-        }
-    }
-
-    function onClickHandler(meet) {
-        alert(meet)
-    }
-
     // 이미지 클릭시 원본 크기로 팝업 보기
     var img = document.getElementsByTagName("img");
     for (var x = 0; x < img.length; x++) {
@@ -437,7 +453,6 @@
             window.open(this.src)
         };
     }
-
 </script>
 </body>
 

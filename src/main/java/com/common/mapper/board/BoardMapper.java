@@ -64,4 +64,5 @@ public interface BoardMapper {
 
     // 댓글 삭제
     void deleteComment(int seq);
+
 }

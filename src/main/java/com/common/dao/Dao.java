@@ -190,4 +190,5 @@ public class Dao {
         MyPageMapper mapper = sqlSession.getMapper(MyPageMapper.class);
         mapper.updateMyInfo(memberDto);
     }
+
 }

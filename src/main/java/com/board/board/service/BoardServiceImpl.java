@@ -238,18 +238,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void updateState(int seq, int state) {
+    public void updateState(BoardDto boardDto) {
 
-        BoardDto boardDto = new BoardDto();
-        boardDto.setSeq(seq);
-
-        if (state == 1) {
-            boardDto.setPet_meet(0);
-        } else if (state == 0) {
-            boardDto.setPet_meet(1);
-        }
-
-        dao.updateState(boardDto);
+        dao.updateState(boardDto); // 발견/미발견 상태변경
 
     }
 

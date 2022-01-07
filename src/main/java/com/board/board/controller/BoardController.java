@@ -20,6 +20,16 @@ public class BoardController {
     @Autowired
     public BoardService boardService;
 
+    // 검색 ajax
+    @ResponseBody
+    @RequestMapping(value = "/board/boardList/search", method = RequestMethod.POST)
+    public List<BoardDto> methodName(@ModelAttribute BoardDto boardDto, SearchCriteriaMainBoard cri) throws Exception {
+
+        List<BoardDto> posts = boardService.getBoardList(cri, boardDto);
+
+        return posts;
+    }
+
     // 게시판 리스트페이지 호출
     @RequestMapping(value = "/board/boardList/{contentsType}", method = RequestMethod.GET)
     public String listPage(@PathVariable("contentsType") String contentsType, BoardDto boardDto,
@@ -119,17 +129,15 @@ public class BoardController {
         return "redirect:/board/boardList/" + contentsType;
     }
 
-    // 발견완료/미발견 상태 변경
-    @RequestMapping(value = "board/updateState/{seq}&{state}", method = RequestMethod.GET)
-    public String updateState(@PathVariable("seq") int seq, @PathVariable("state") int state) {
+    // 발견완료/미발견 상태 변경 ajax
+    @ResponseBody
+    @RequestMapping(value = "board/boardDetail/updateState", method = RequestMethod.GET)
+    public int methodName(@ModelAttribute BoardDto boardDto) throws Exception {
 
-        try {
-            boardService.updateState(seq, state);
-        } catch (Exception e) {
-            System.out.println("BoardController 발견 상태 변경 로직 실행 중 error : " + e.getMessage());
-        }
+        int result = boardDto.getPet_meet();
+        boardService.updateState(boardDto);
 
-        return "redirect:/board/boardDetail/" + seq;
+        return result;
     }
 
     // 후기 추가

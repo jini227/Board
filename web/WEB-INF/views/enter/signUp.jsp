@@ -63,19 +63,19 @@
                 <div class="signUpTerms">
 
                     <label class="checkbox" for="ageAgree">
-                        <input type="checkbox" name="term" id="ageAgree" value="ageAgree" required="required">
+                        <input type="checkbox" name="term" id="ageAgree" value="ageAgree" >
                         <span class="icon"></span>
                         <span class="text">만 14세 이상입니다.(필수)</span>
                     </label>
                     <label class="checkbox" for="infoAgree">
-                        <input type="checkbox" name="term" id="infoAgree" value="infoAgree" required="required">
+                        <input type="checkbox" name="term" id="infoAgree" value="infoAgree" >
                         <span class="icon"></span>
                         <span class="text">개인정보 수집 이용 동의 (필수)</span>
                     </label>
 
                 </div>
                 <div class="signUpBoxbtn">
-                    <input type="submit" value="회원가입" onclick="signUpChk(event)">
+                    <input type="button" value="회원가입" onclick="signUpChk();">
                 </div>
             </form:form>
         </div>
@@ -130,11 +130,16 @@
         }
     };
 
-    function signUpChk(event) {
+    function signUpChk() {
         var ageAgree = document.getElementById("ageAgree");
         var infoAgree = document.getElementById("infoAgree");
         var chk = $('#id').attr('check_result');
 
+        if (chk == 'fail') {
+            alert("아이디 중복체크를 해주세요.");
+            //event.preventDefault();
+            return false;
+        }
         if (!ageAgree.checked) {
             alert("필수사항(만 14세 이상)을 체크해주세요");
             return false;
@@ -142,11 +147,6 @@
         if (!infoAgree.checked) {
             alert("필수사항(개인정보 동의)을 체크해주세요");
             return false;
-        }
-        if (chk === 'fail') {
-            alert("아이디 중복체크를 해주세요.");
-            event.preventDefault();
-            // return false;
         }
         document.getElementById('signUpCommand').submit();
     }

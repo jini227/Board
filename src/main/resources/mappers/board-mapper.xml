@@ -46,8 +46,8 @@
                     <if test="searchKeyword !='' and searchKeyword !=null and searchOption == 'writer'">
                         AND m.id = #{searchKeyword}
                     </if>
-                    <if test="state !='' and state !=null and pet_meet != 2">
-                        AND b.pet_meet = #{pet_meet}
+                    <if test="state !='' and state !=null and state != 2">
+                        AND b.pet_meet = #{state}
                     </if>
             )
         WHERE

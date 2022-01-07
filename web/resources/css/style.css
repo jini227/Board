@@ -980,14 +980,19 @@ label.right {
 
 #contentsMenu span:hover {
     color: gold;
+    cursor: pointer;
 }
 
 #contentsMenu span:hover i {
     color: gold;
 }
 
-
-
+.search-result p {
+    background-color: whitesmoke;
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+}
 
 #contentsTitle {
     text-align: center;
@@ -1311,7 +1316,23 @@ label.right {
     font-size: 15px;
 }
 
-.reviewContents p {
+.reviewContents.active {
+    display: none;
+}
+
+.reviewContents {
+    display: block;
+}
+
+.reviewBtnToggle.active {
+    display: none;
+}
+
+.reviewBtnToggle {
+    display: block;
+}
+
+.reviewContents p span {
     font-size: 15px;
     color: #f68100;
     line-height: 30px;

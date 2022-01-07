@@ -32,7 +32,7 @@ public interface BoardService {
     public void deleteBoard(int seq);
 
     // 상세페이지 - 발견/미발견
-    public void updateState(int seq, int state);
+    public void updateState(BoardDto boardDto);
 
     // 상세페이지 - 후기 작성
     public void updateReview(BoardDto boardDto);
@@ -48,4 +48,5 @@ public interface BoardService {
 
     // 상세페이지 - 댓글 삭제
     void deleteComment(int seq);
+
 }
