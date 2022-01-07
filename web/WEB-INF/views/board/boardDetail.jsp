@@ -94,7 +94,9 @@
 
                 <div class="reviewContents">
                     <p style="white-space: pre-line;">
+                        <c:if test="${not empty detail.review}">
                         <i class="fas fa-quote-left"></i><span class="reviewText">${detail.review}</span><i class="fas fa-quote-right"></i>
+                        </c:if>
                     </p>
                 </div>
             </div>
@@ -242,7 +244,6 @@
             var seq = ${detail.seq};
             var pet_meet = 0;
 
-            console.log(state)
             if (state == '발견완료') {
                 chk = confirm("'미발견'으로 변경 하시겠습니까?");
                 pet_meet = 0;

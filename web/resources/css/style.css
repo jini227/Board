@@ -1012,6 +1012,13 @@ label.right {
     align-items: center;
 }
 
+.search-result {
+    display: none;
+}
+.search-result.active {
+    display: block;
+}
+
 
 .wrapBoardlist {
     width: 100%;

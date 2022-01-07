@@ -3,7 +3,6 @@ package com.board.board.controller;
 import com.board.board.service.BoardService;
 import com.common.dto.board.BoardCommentDto;
 import com.common.dto.board.BoardDto;
-import com.common.dto.paging.PageMakerMainBoard;
 import com.common.dto.paging.SearchCriteriaMainBoard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,36 +19,45 @@ public class BoardController {
     @Autowired
     public BoardService boardService;
 
+    // 게시판 리스트페이지 호출
+    @RequestMapping(value = "/board/boardList/{contentsType}", method = RequestMethod.GET)
+    public String listPage(@PathVariable("contentsType") String contentsType) {
+
+//        boardDto.setContents_type(contentsType);
+//        List<BoardDto> posts = boardService.getBoardList(cri, boardDto);
+//        model.addAttribute("posts", posts);
+//
+//        PageMakerMainBoard pageMaker = new PageMakerMainBoard();
+//        pageMaker.setCri(cri);
+//        pageMaker.setTotalCount(posts.size());
+//        model.addAttribute("pageMaker", pageMaker);
+
+        return "board/boardList";
+    }
+
     // 검색 ajax
     @ResponseBody
     @RequestMapping(value = "/board/boardList/search", method = RequestMethod.POST)
-    public List<BoardDto> methodName(@ModelAttribute BoardDto boardDto, SearchCriteriaMainBoard cri) throws Exception {
+    public List<BoardDto> methodName(@ModelAttribute BoardDto boardDto, SearchCriteriaMainBoard cri, Model model) throws Exception {
 
         List<BoardDto> posts = boardService.getBoardList(cri, boardDto);
 
+
+        // 페이징을 어떻게 해야 할지가 의문,,,,
+//        PageMakerMainBoard pageMaker = new PageMakerMainBoard();
+//        pageMaker.setCri(cri);
+//        pageMaker.setTotalCount(posts.size());
+//        model.addAttribute("pageMaker", pageMaker);
+//
+//        System.out.println(pageMaker.isPrev()); // false
+//        System.out.println(pageMaker.makeQuery(pageMaker.getStartPage()-1)); // ?page=0&perPageNum=20
+//        System.out.println(pageMaker.getStartPage()); // 1
+//        System.out.println(pageMaker.getEndPage()); // 1
+//        System.out.println(pageMaker.isNext()); // false
+//        System.out.println(pageMaker.getEndPage()); // 1
+//        System.out.println(pageMaker.makeQuery(pageMaker.getEndPage()+1)); // ?page=2&perPageNum=20
+
         return posts;
-    }
-
-    // 게시판 리스트페이지 호출
-    @RequestMapping(value = "/board/boardList/{contentsType}", method = RequestMethod.GET)
-    public String listPage(@PathVariable("contentsType") String contentsType, BoardDto boardDto,
-                           @ModelAttribute("cri") SearchCriteriaMainBoard cri, Model model) {
-
-        try {
-            boardDto.setContents_type(contentsType);
-            List<BoardDto> posts = boardService.getBoardList(cri, boardDto);
-            model.addAttribute("posts", posts);
-
-            PageMakerMainBoard pageMaker = new PageMakerMainBoard();
-            pageMaker.setCri(cri);
-            pageMaker.setTotalCount(posts.size());
-            model.addAttribute("pageMaker", pageMaker);
-
-            return "board/boardList";
-        } catch (Exception e) {
-            System.out.println("BoardController 리스트페이지 호출 로직 실행 중 error : " + e.getMessage());
-            return "index";
-        }
     }
 
     // 게시판 글작성 페이지 호출

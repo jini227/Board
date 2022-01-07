@@ -31,7 +31,6 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardDto> getBoardList(SearchCriteriaMainBoard cri, BoardDto boardDto) {
 
-        boardDto.setKeyword(cri.getKeyword());
         boardDto.setRowStart(cri.getRowStart());
         boardDto.setRowEnd(cri.getRowEnd());
 
